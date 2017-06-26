@@ -11,6 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Auth::routes();
+
+//Route::post('login', 'Auth\LoginController@doLogin')->name('login');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::group(['middleware' => 'auth'], function () {
+  
+   Route::get('/', 'DashBoardController@index' );
+
+   Route::post('profile', 'UserProfileController@update_avatar' );
+
+   Route::get('/home', 'HomeController@index')->name('home');
+
+   Route::get('/profile', 'UserProfileController@profile')->name('user');
+
 });

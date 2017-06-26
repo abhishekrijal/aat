@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace AAT;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function setNameAttribute($data){
+
+        $this->attributes['name'] = ucfirst($data);
+    }
+
+    public function setPasswordAttribute($data){
+
+        $this->attributes['password'] = bcrypt($data);
+    }
 }
