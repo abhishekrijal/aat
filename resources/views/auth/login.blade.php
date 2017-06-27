@@ -1,11 +1,17 @@
-@extends('layouts.app')
+@extends('layout.auth')
 
 @section('content')
 <div class="container">
+
+<header style="text-align: center; padding:40px;">
+    <a href="#" class="brand-logo center"><img style="border-radius:50%;" src="{{asset('images/aat-logo-71x71.jpg')}}"></a><br>
+    <span style="margin: 10px;" ><strong>AAT's Dashboard Login</strong></span>
+</header>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+            <div class="card panel panel-default">
+
+                <div class="panel-heading"><strong>Login</strong></div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
@@ -13,7 +19,7 @@
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
+                            <div class="input-field col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
@@ -40,11 +46,15 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
+                            <!-- Switch -->
+                              <div class="switch">
+                                <label>
+                                Remember Me
+                                  <input type="checkbox">
+                                  <span class="lever" name="remember" {{ old('remember') ? 'checked' : '' }} ></span>
+                                  
+                                </label>
+                              </div>
                             </div>
                         </div>
 
@@ -56,6 +66,10 @@
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
+                                </a><br>
+                                <strong>Dont Have a Account ?</strong><br>
+                                <a class="btn btn-success" href="{{ url('/register') }}">
+                                    Register Now
                                 </a>
                             </div>
                         </div>
